@@ -34,10 +34,10 @@ def get_sales_data():
             print("Data is valid!")
             break
         #the 'if' here refers to the return True/False in the validate_data function
-        #so it calls the function and also checks if the function returns True (data valid) or False
+        #so it calls the function and checks if the function returns True (data valid) or False
         #short for if validate_data == True, i.e. if the data is valid
 
-        return sales_data
+    return sales_data
 
 def validate_data(values):
     """
@@ -58,4 +58,15 @@ def validate_data(values):
     return True 
     #if the data is valid, it gets to this point and returns True
 
-get_sales_data()
+def update_sales_worksheet(data):
+    """
+    Update sales worksheet, add new row with the list data provided.
+    """
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales") 
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updated succesfully.\n")
+
+data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
