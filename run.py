@@ -20,14 +20,24 @@ def get_sales_data():
     """
     Get sales figures from the user
     """
-    print("Please enter sales data from the last market")
-    print("Sales data should be separated by commas")
-    print("Example: 10,20,30,40,50,60\n")
+    while True:
+        #while True is an infinite loop that is only stopped by the break command
+        print("Please enter sales data from the last market")
+        print("Sales data should be separated by commas")
+        print("Example: 10,20,30,40,50,60\n")
 
-    data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here: ")
 
-    sales_data = data_str.split(",")
-    validate_data(sales_data)
+        sales_data = data_str.split(",")
+        
+        if validate_data(sales_data):
+            print("Data is valid!")
+            break
+        #the 'if' here refers to the return True/False in the validate_data function
+        #so it calls the function and also checks if the function returns True (data valid) or False
+        #short for if validate_data == True, i.e. if the data is valid
+
+        return sales_data
 
 def validate_data(values):
     """
@@ -41,5 +51,11 @@ def validate_data(values):
             )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
+        return False
+        #if the data is not valid, the function stops here and returns false
+        #this makes the previous function request data from the user again
+
+    return True 
+    #if the data is valid, it gets to this point and returns True
 
 get_sales_data()
