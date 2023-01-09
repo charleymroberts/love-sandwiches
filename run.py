@@ -101,6 +101,20 @@ def update_worksheet(data, worksheet):
     worksheet_to_update.append_row(data)
     print(f"{worksheet} worksheet updated succesfully\n")
 
+def get_last_5_entries_sales():
+    """
+    Calculates average number of sandwiches sold at the last five markets
+    """
+    sales = SHEET.worksheet("sales")
+
+    columns = []
+
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+
+    return columns
+
 def main():
     """
     Run all program functions
@@ -112,5 +126,8 @@ def main():
     print(f"Surplus: {new_surplus_data}")
     update_worksheet(new_surplus_data, "surplus")
 
+
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
+
+sales_columns = get_last_5_entries_sales()
